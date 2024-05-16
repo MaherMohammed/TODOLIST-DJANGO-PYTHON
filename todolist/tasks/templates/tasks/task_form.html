@@ -1,0 +1,9 @@
+<form method="POST" action="">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="text-primary text-dark font-weight-bold">Enter Title</label>
+        <input type="text" class="form-control" name="title" placeholder="Enter Title">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary btn-lg">Create Task</button>
+</form> 

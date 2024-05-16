@@ -1,0 +1,57 @@
+<h1>Home</h1>
+<br>
+{% block content %}
+<div>
+    {% if loggedIn == 'in' %}
+       
+        <h1>Your Lists</h1>
+        {% for list in lists %}
+            <li>{{ list.title }}
+                <ul>
+                    {% for task in list.tasks.all %}
+                    {% if task.completed %}
+                        
+                    {% else %}
+                        <li>{{ task.title }}
+                            <br>
+                            <form method="POST" action="{% url 'update-task' task.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary btn-lg">Finished</button>
+                            </form>
+                            
+                        </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                <form method="POST" action="{% url 'create-task' list.id %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="text-primary text-dark font-weight-bold">Enter Title</label>
+                        <input type="text" class="form-control" name="title" placeholder="Enter Title">
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary btn-lg">Create Task</button>
+                </form> 
+            </li>
+        {% endfor %}
+        <br>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-lg">Logout</button>
+        </form>
+        {% else %}
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-lg">Log In</button>
+        </form>
+        {% endif %}
+
+        <h1>Create List</h1>
+        {% include 'tasks/list_form.html' %}
+        <br>
+        
+        
+
+</div>
+
+{% endblock %}

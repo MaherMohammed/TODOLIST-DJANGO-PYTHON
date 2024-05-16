@@ -1,0 +1,10 @@
+<form method="POST" action="{% url 'create-list' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="text-primary text-dark font-weight-bold">Enter Title</label>
+        <input type="text" class="form-control" name="list" placeholder="Enter Title">
+    </div>
+
+    <br>
+    <button type="submit" class="btn btn-primary btn-lg">Create</button>
+</form>
